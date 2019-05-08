@@ -7,33 +7,37 @@ const setUpCards = () => {
   for (let i = 0; i < cardFaceList.length; i++) {
     let cardNode = document.createElement('div');
     cardNode.classList.add("card");
+    let faceNode = document.createElement('div');
+    faceNode.classList.add("card-face");
+    let iconNode = document.createElement('i');
+    iconNode.classList.add("fab");
+    iconNode.classList.add("fa-" + cardFaceList[i]);
+    iconNode.classList.add("face-icon");
+    faceNode.appendChild(iconNode);
+    cardNode.appendChild(faceNode);
     gameBoard.appendChild(cardNode);
   }
 }
 
-const setUpCardFaces = () => {
-  let cardArray = document.querySelectorAll(".card");
-  for (let i = 0; i < cardFaceList.length; i++) {
-    let faceNode = document.createElement('i');
-    faceNode.classList.add("fab");
-    faceNode.classList.add("fa-" + cardFaceList[i]);
-    faceNode.classList.add("card-face");
-    cardArray[i].appendChild(faceNode);
-  }
-}
-
 setUpCards();
-setUpCardFaces();
+// setUpCardFaces();
 
 const setUpCardListeners = () => {
   let cardArray = document.querySelectorAll(".card-face");
   cardArray.forEach(function(card) {
     card.addEventListener("click", cardClick);
-  })
+  });
 }
 
 const cardClick = (event) => {
-  event.target.style.opacity = 1;
+  console.log(event.target);
+  if (event.target.classList.contains("face-icon")){
+    console.log("face icon");
+    event.target.parentElement.classList.toggle("show");
+  } else {
+    console.log("card face");
+    event.target.classList.toggle("show");
+  }
 }
 
 setUpCardListeners();

@@ -12,7 +12,6 @@ html, body {
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
-  /* width: 60%; */
 }
 
 .game {
@@ -32,8 +31,9 @@ html, body {
   grid-template-rows: repeat(4, 150px);
   grid-gap: 20px;
   background-color: rgb(0, 123, 0);
-  padding: 20px;
+  padding: 30px;
   border-radius: 5px;
+  box-shadow: 10px 10px 8px #555;
 }
 
 .card {
@@ -41,18 +41,49 @@ html, body {
   padding: 0;
   text-align: center;
   border-radius: 5px;
+  box-shadow: 5px 5px 8px;
+  perspective: 1000px;
 }
 
 .card-face {
+  margin-top: auto;
+  margin-bottom: auto;
   font-size: 100px;
   opacity: 0;
   height: 100%;
   width: 100%;
-  padding: 0;
-  align-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   -webkit-transition: opacity .4s ease-in-out;
   -moz-transition: opacity .4s ease-in-out;
   -ms-transition: opacity .4s ease-in-out;
   -o-transition: opacity .4s ease-in-out;
   transition: opacity .4s ease-in-out;
+}
+
+.card-face:hover {
+  cursor: pointer;
+}
+
+.face-icon {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.show {
+  opacity: 1;
+}
+
+.game-header {
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.title {
+  font-size: 3rem;
+  padding-bottom: 5px;
 }
