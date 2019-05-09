@@ -1,14 +1,18 @@
 let cardFaceList = ["airbnb", "airbnb", "adobe", "adobe", "amazon", "amazon", "app-store", "app-store", "apple", "apple", "blogger", "blogger", "battle-net", "battle-net", "bluetooth", "bluetooth"]
 
-cardFaceList.sort(() => Math.random() - 0.5);
+let moveCounter = 0;
+let totalSeconds = 0;
+let started = false;
 
 const setUpCards = () => {
+  cardFaceList.sort(() => Math.random() - 0.5);
   let gameBoard = document.querySelector(".game-board");
   for (let i = 0; i < cardFaceList.length; i++) {
     let cardNode = document.createElement('div');
     cardNode.classList.add("card");
     let faceNode = document.createElement('div');
     faceNode.classList.add("card-face");
+    faceNode.id = (cardFaceList[i]);
     let iconNode = document.createElement('i');
     iconNode.classList.add("fab");
     iconNode.classList.add("fa-" + cardFaceList[i]);
@@ -19,8 +23,19 @@ const setUpCards = () => {
   }
 }
 
-setUpCards();
-// setUpCardFaces();
+const resetBoard = () => {
+  let gameBoard = document.querySelector(".game-board");
+  while (gameBoard.firstChild) {
+    gameBoard.removeChild(gameBoard.firstChild);
+  }
+  setUpCards();
+  setUpCardListeners();
+  moveCounter = 0;
+  document.querySelector(".move-counter").textContent = moveCounter;
+  totalSeconds = 0;
+  document.querySelector(".timer").textContent = totalSeconds;
+  started = false;
+}
 
 const setUpCardListeners = () => {
   let cardArray = document.querySelectorAll(".card-face");
@@ -29,15 +44,59 @@ const setUpCardListeners = () => {
   });
 }
 
+const incrementMoveCounter = () => {
+  moveCounter++;
+  document.querySelector(".move-counter").textContent = moveCounter;
+}
+
 const cardClick = (event) => {
-  console.log(event.target);
-  if (event.target.classList.contains("face-icon")){
-    console.log("face icon");
-    event.target.parentElement.classList.toggle("show");
+  if (!started) {
+    started = true;
+  }
+  let target;
+  if (event.target.classList.contains("face-icon")) {
+    target = event.target.parentElement;
   } else {
-    console.log("card face");
-    event.target.classList.toggle("show");
+    target = event.target;
+  }
+
+  if (!target.classList.contains("show")) {
+    target.classList.add("show");
+
+    let activeList = document.querySelectorAll(".active");
+    if (activeList.length <= 1) {
+      target.classList.add("active");
+    }
+    activeList = document.querySelectorAll(".active");
+    if (activeList.length === 2) {
+      if (activeList[0].id === activeList[1].id) {
+        activeList[0].classList.add("matched");
+        activeList[1].classList.add("matched");
+      } else {
+        setTimeout(() => {
+          activeList[0].classList.remove("show");
+          activeList[1].classList.remove("show");
+        }, 400);
+      }
+      incrementMoveCounter();
+      activeList[0].classList.remove("active");
+      activeList[1].classList.remove("active");
+    }
+  }
+
+  matchedList = document.querySelectorAll(".matched");
+  if (matchedList.length === cardFaceList.length) {
+    console.log("Done");
+    started = false;
   }
 }
 
+setUpCards();
 setUpCardListeners();
+document.querySelector(".restart").addEventListener("click", resetBoard);
+setInterval(() => {
+  if (started) {
+    totalSeconds++;
+    document.querySelector(".timer").textContent = totalSeconds;
+  }
+}, 1000);
