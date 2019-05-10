@@ -86,7 +86,7 @@ const cardClick = (event) => {
         setTimeout(() => {
           activeList[0].classList.remove("show");
           activeList[1].classList.remove("show");
-        }, 400);
+        }, 800);
       }
       incrementMoveCounter();
       activeList[0].classList.remove("active");
