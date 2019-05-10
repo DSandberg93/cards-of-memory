@@ -37,6 +37,16 @@ const resetBoard = () => {
   started = false;
 }
 
+const setUpReplayButton = () => {
+  let replayButton = document.querySelector(".replay-button");
+  let replayModal = document.querySelector(".replay-modal");
+  replayButton.addEventListener("click", () => {
+    console.log("Play Again");
+    replayModal.style.display = "none";
+    resetBoard();
+  });
+}
+
 const setUpCardListeners = () => {
   let cardArray = document.querySelectorAll(".card-face");
   cardArray.forEach(function(card) {
@@ -86,13 +96,17 @@ const cardClick = (event) => {
 
   matchedList = document.querySelectorAll(".matched");
   if (matchedList.length === cardFaceList.length) {
-    console.log("Done");
+    let replayModal = document.querySelector(".replay-modal");
+    replayModal.querySelector(".final-time").textContent = totalSeconds;
+    replayModal.querySelector(".final-move-count").textContent = moveCounter;
+    replayModal.style.display = "flex";
     started = false;
   }
 }
 
 setUpCards();
 setUpCardListeners();
+setUpReplayButton();
 document.querySelector(".restart").addEventListener("click", resetBoard);
 setInterval(() => {
   if (started) {

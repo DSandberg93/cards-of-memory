@@ -12,13 +12,19 @@ html, body {
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
+  background-image: url("./vincent-burkhead-147113-unsplash.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .game {
   text-align: center;
   font-size: 2rem;
-  padding: 10px;
   position: relative;
+  padding-top: 10px;
+  background-color: #FFFB;
+  border-radius: 5px;
+  box-shadow: 10px 10px 8px #333D;
 }
 
 .game > h1 {
@@ -30,10 +36,16 @@ html, body {
   grid-template-columns: repeat(4, 150px);
   grid-template-rows: repeat(4, 150px);
   grid-gap: 20px;
-  background-color: rgb(0, 123, 0);
+  background-image: linear-gradient(135deg, lightgrey 20%, lightblue 50%, lightgreen 90%);
   padding: 30px;
-  border-radius: 5px;
-  box-shadow: 10px 10px 8px #555;
+  /* border-radius: 5px; */
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.game-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 33%);
 }
 
 .card {
@@ -41,7 +53,7 @@ html, body {
   padding: 0;
   text-align: center;
   border-radius: 5px;
-  box-shadow: 5px 5px 8px;
+  box-shadow: 5px 5px 8px #000D;
   perspective: 1000px;
 }
 
@@ -78,16 +90,91 @@ html, body {
 
 .game-header {
   border-radius: 5px;
-  padding-top: 10px;
   padding-bottom: 10px;
   font-size: 1.5rem;
+  margin-bottom: 10px;
 }
 
 .title {
   font-size: 3rem;
   padding-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .restart:hover {
   cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+}
+
+.modal-container {
+  background-color: #fefefe;
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  padding: 40px;
+  font-size: 1.5rem;
+  box-shadow: 5px 5px 3px #0005;
+}
+
+.modal-content {
+  width: 100%;
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.replay-button {
+  margin-top: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-radius: 0;
+  border: none;
+  font-size: 1em;
+  color: white;
+  background-color: green;
+  -moz-box-shadow: 3px 3px 2px #000C;
+  -webkit-box-shadow: 3px 3px 2px #000C;
+  box-shadow: 3px 3px 2px #000C;
+  -webkit-transition: transform .2s;
+  -moz-transition: transform .2s;
+  -ms-transition: transform .2s;
+  -o-transition: transform .2s;
+  transition: transform .2s;
+}
+
+.replay-button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.image-credit {
+  text-align: right;
+  width: 90%;
+  font-size: 1.2rem;
+  color: #333;
+  text-decoration: none;
 }
